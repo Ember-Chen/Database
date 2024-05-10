@@ -5,11 +5,9 @@ tags: DDL
 categories: [SQL,基础]
 ---
 
-# DDL
+# 表
 
-## 表
-
-### 创建表
+## 创建表
 
 ```sql
 CREATE TABLE table(
@@ -88,7 +86,7 @@ CREATE TABLE table(
   
 
 
-### 修改表
+## 修改表
 
 - 添加新字段
 
@@ -136,7 +134,7 @@ CREATE TABLE table(
 
 
 
-### 删除表
+## 删除表
 
 ```sql
 DROP TABLE <表名>;
@@ -146,7 +144,7 @@ DROP TABLE <表名>;
 
 
 
-## 约束
+# 约束
 
 - 创建约束
 
@@ -175,7 +173,7 @@ DROP TABLE <表名>;
 
 
 
-## 规则
+# 规则
 
 - 约束 vs. 规则
 
@@ -199,9 +197,9 @@ DROP TABLE <表名>;
 
 
 
-## 索引
+# 索引
 
-### 创建索引
+## 创建索引
 
 ```sql
 CREATE [UNIQUE] INDEX <索引名> ON <表名>(列名1 次序, 列名2 次序, ...)
@@ -216,7 +214,7 @@ CREATE UNIQUE INDEX my_index ON students(sno ASC, cno DESC);
 
  
 
-### 重建索引
+## 重建索引
 
 ```sql
 ALTER INDEX <索引名> ON <表名> REORGANIZE;
@@ -224,7 +222,7 @@ ALTER INDEX <索引名> ON <表名> REORGANIZE;
 
 
 
-### 删除索引
+## 删除索引
 
 ```sql
 DROP INDEX <索引名> ON <表名>;
@@ -234,7 +232,7 @@ DROP INDEX <索引名> ON <表名>;
 
 
 
-## 视图
+# 视图
 
 - 创建视图
 
@@ -328,7 +326,7 @@ DROP INDEX <索引名> ON <表名>;
     - 对不同用户定义不同视图，使每个用户只能看到他有权看到的数据。通过WITH CHECK OPTION可以对关键数据定义操作时间限制
 
 
-## 易错点总结
+# 易错点总结
 - `INDEX`相关操作，很容易遗忘`ON`；索引一定要依附于具体的表
     ```sql
     CREATE INDEX myidx ON student(sno ASC);

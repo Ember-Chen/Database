@@ -5,8 +5,7 @@ tags: DCL
 categories: [SQL,基础]
 ---
 
-# DCL
-## 授权
+# 授权
 ```sql
 GRANT <权限>[,<权限>] ...[ON <对象类型> <对象名>]
 TO <用户>[,<用户>] ...[WITH GRANT OPTION]
@@ -26,7 +25,7 @@ TO <用户>[,<用户>] ...[WITH GRANT OPTION]
     ```
 
 
-## 收回授权
+# 收回授权
 ```sql
 REVOKE <权限>[,<权限>]…[ON <对象类型> <对象名>]
     FROM <用户>[,<用户>]
