@@ -268,10 +268,8 @@ DROP INDEX <索引名> ON <表名>;
 
     ```sql
     CREATE VIEW IS_1_Stu (Sno,Sname,Grade) AS
-    
-    SELECT Student.Sno,Sname,Grade FROM Student,SC
-    
-    WHERE Student.Sno=SC.Sno AND Sdept=’IS’ AND Cno=’1’;
+      SELECT Student.Sno,Sname,Grade FROM Student,SC
+      WHERE Student.Sno=SC.Sno AND Sdept=’IS’ AND Cno=’1’;
     ```
 
 - 基于视图的视图

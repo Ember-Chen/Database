@@ -30,6 +30,10 @@ categories: [SQL,基础]
     ```sql
     SELECT DISTINCT(sno) FROM sc;
     ```
+  - `DISTINCT`在`COUNT`内
+    ```sql
+    SELECT COUNT(DISTINCT *) FROM sc;
+    ```
 
 - `ORDER BY`排序
 
