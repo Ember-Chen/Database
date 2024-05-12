@@ -78,7 +78,7 @@ CREATE TABLE table(
       cno CHAR(5) REFERENCES FROM class(cno),
       ono CHAR(5),
       sex CHAR(2),
-      CONSTRAINT bi_sex CHECK(sex IN (‘男’,’女’))
+      CONSTRAINT bi_sex CHECK(sex IN ('男','女'))
       FOREIGN KEY (ono) REFERENCES org(ono)
   );
   ```
@@ -164,7 +164,7 @@ DROP TABLE <表名>;
 
   ```sql
   INSERT INTO doc_exd VALUES (-1);
-  ALTER TABLE doc_exd WITH NOCHECK
+  ALTER TABLE doc_exd WITH NO CHECK
   	ADD CONSTRAINT exd_check CHECK (column_a > 1);
   // 如果不加NOCHECK关键字，新添加的验证会对原有数据报错
   ```
@@ -243,7 +243,7 @@ DROP INDEX <索引名> ON <表名>;
   - 包含WITH CHECK OPTION时，对视图的更新操作，只会作用于视图内包含的数据
 
     ```sql
-    CREATE  VIEW  <视图名>  [(<列名> [,<列名>]…)] AS
+    CREATE  VIEW <视图名>  [(<列名> [,<列名>]…)] AS
     <子查询>  [WITH CHECK OPTION];
     ```
 
@@ -256,10 +256,11 @@ DROP INDEX <索引名> ON <表名>;
   - [e.g.] 建立信息系学生的视图，并要求透过该视图进行的更新操作只涉及信息系学生
 
     ```sql
-    CREATE VIEW IS_Student AS
-    	SELECT Sno, Sname, Sage FROM Student WHERE Sdept='IS' WITH CHECK OPTION
-    // 对视图的更新，删除操作，都会加上Sdept=’IS’的条件限定
-    // 对视图的插入操作，若Sdept为空，则自动将Sdept设为’IS’；若不满足Sdept=’IS’，则拒绝插入操作
+    CREATE VIEW is_student AS
+    	SELECT sno, sname, sage FROM student WHERE sdept='IS'
+      WITH CHECK OPTION
+    // 对视图的更新，删除操作，都会加上sdept='IS'的条件限定
+    // 对视图的插入操作，若sdept为空，则自动将sdept设为'IS'；若不满足sdept='IS'，则拒绝插入操作
     ```
 
 - 多表视图
@@ -267,9 +268,9 @@ DROP INDEX <索引名> ON <表名>;
   - [e.g.] 建立信息系选修了1号课程的学生视图
 
     ```sql
-    CREATE VIEW IS_1_Stu (Sno,Sname,Grade) AS
-      SELECT Student.Sno,Sname,Grade FROM Student,SC
-      WHERE Student.Sno=SC.Sno AND Sdept=’IS’ AND Cno=’1’;
+    CREATE VIEW is_1_stu (sno,sname,grade) AS
+      SELECT student.sno,sname,grade FROM student,sc
+      WHERE student.sno=sc.sno AND sdept=’IS’ AND cno=’1’;
     ```
 
 - 基于视图的视图
@@ -281,21 +282,11 @@ DROP INDEX <索引名> ON <表名>;
     	SELECT sno,sname,grade FROM is_s1 WHERE grade>=90; 
     ```
 
-- 含表达式的视图
-
-  - [e.g.] 定义一个反映学生出生年份的视图
-
-    ```sql
-    CREATE VIEW BT_S(Sno,Sname,Sbirth)
-    
-    AS SELECT Sno,Sname,2021-Sage FROM Student;
-    ```
-
 - 含分组的视图
 
   ```sql
-  CREAT VIEW S_G(Sno,Gavg) AS
-  	SELECT Sno，AVG(Grade)  FROM SC GROUP BY Sno;
+  CREATE VIEW s_g(sno,g_avg) AS
+  	SELECT sno，AVG(grade)  FROM sc GROUP BY sno;
   ```
 
 - 基本概念

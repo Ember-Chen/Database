@@ -18,16 +18,21 @@ VALUES
 (...);
 ```
 <!-- more -->
-- [e.g.] 将(95020,陈冬,男,IS,18岁) 插入到Student表中
+- [e.g.] 将(21020,陈冬,男,IS,18岁) 插入到Student表中
 
   ```sql
   INSERT INTO student
-  VALUES (‘21020’,'陈冬','男','IS',18);
+  VALUES ('21020','陈冬','男','IS',18);
   ```
 
 
 
 ## 对表插入子查询结果
+
+```sql
+INSERT INTO <表名>
+  <查询子句>
+```
 
 - 只能插入**现有表**
 
@@ -74,8 +79,6 @@ UPDATE <表名> SET <字段>=<值> WHERE <条件>;
   	SELECT 1 FROM stu WHERE sc.sno=stu.sno AND stu.dept='CS'
   )
   ```
-
-
 
 
 

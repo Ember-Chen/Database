@@ -18,10 +18,10 @@ categories: [SQL,基础]
 <!-- more -->
 
 - 自定义查询结果列名
-
-  ```sql
-  SELECT sname name FROM student;
-  ```
+  - [e.g.] 查询student表中的学生姓名，列明更改为name
+    ```sql
+    SELECT sname name FROM student;
+    ```
 
 - `DISTINCT`-去重
 
@@ -32,7 +32,7 @@ categories: [SQL,基础]
     ```
   - `DISTINCT`在`COUNT`内
     ```sql
-    SELECT COUNT(DISTINCT *) FROM sc;
+    SELECT COUNT(DISTINCT cno) FROM sc;
     ```
 
 - `ORDER BY`排序
@@ -78,14 +78,14 @@ categories: [SQL,基础]
     ```sql
     SELECT sno,
     CASE
-        WHEN grade>=90 THEN ‘优’
-        WHEN grade BETWEEN 80 AND 89 THEN ‘良’
-        WHEN grade BETWEEN 70 AND 79 THEN ‘中’
-        WHEN grade BETWEEN 60 AND 69 THEN ‘及格’
-        WHEN grade<60 THEN ‘不及格’
+        WHEN grade>=90 THEN '优'
+        WHEN grade BETWEEN 80 AND 89 THEN '良'
+        WHEN grade BETWEEN 70 AND 79 THEN '中'
+        WHEN grade BETWEEN 60 AND 69 THEN '及格'
+        WHEN grade<60 THEN '不及格'
     End AS degree
     FROM sc
-    WHERE cno=’001’ AND grade IS NOT NULL;
+    WHERE cno='001' AND grade IS NOT NULL;
     ```
 
 - `UNION`查询结果进行**并**操作
@@ -173,15 +173,8 @@ categories: [SQL,基础]
   - [e.g.] 查询每个学生的学号、姓名、选修的课程名及成绩
 
     ```sql
-    /*
-    共有3张表，Student, SC, Course
-    Student的属性: Sno, Sname
-    SC的属性: Cno, Sno, grade
-    Course的属性: Cno, Cname
-    */
-    SELECT Student.Sno,Sname,Cname,grade
-    FROM Student,SC,Course
-    WHERE Student.Sno=SC.Sno AND SC.Cno=Course.Cno;
+    SELECT Student.Sno,Sname,Cname,grade FROM Student,SC,Course WHERE
+      Student.Sno=SC.Sno AND SC.Cno=Course.Cno;
     ```
 
 
@@ -194,18 +187,20 @@ categories: [SQL,基础]
 
 - 相关子查询
 
+  - 从外至里，外部查询每查询到一个信息，就拿着这个信息进行1次完整的内部查询
+
 - [e.g.] 查询选择课程2的学生的姓名
 
   ```sql
   SELECT Sname FROM Student
-  WHERE Sno IN (SELECT Sno FROM SC WHERE Cno=’2’);
+  WHERE Sno IN (SELECT Sno FROM SC WHERE Cno='2');
   ```
 
 - [e.g.] 查询与刘晨在同一个系学习的学生
 
   ```sql
   SELECT Sname FROM Student
-  WHERE Sdept=(SELECT Sdept FROM Student WHERE Sname=‘刘晨’);
+  WHERE Sdept=(SELECT Sdept FROM Student WHERE Sname='刘晨');
   ```
 
 - [e.g.] 和学号为“108”的同学同年出生的所有学生的sno、sname和 birthday列
